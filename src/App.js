@@ -28,6 +28,13 @@ function TodoApp() {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("Todo") !== null) {
+      const newTodos = localStorage.getItem("Todo");
+      setTodos(JSON.parse([...todos, newTodos]));
+    }
+  }, []);
+  
+  useEffect(() => {
     if (firstRender.current) {
       console.log("true");
       firstRender.current = false;
@@ -37,12 +44,7 @@ function TodoApp() {
     }
   }, [todos]);
 
-  useEffect(() => {
-    if (localStorage.getItem("Todo") !== null) {
-      const newTodos = localStorage.getItem("Todo");
-      setTodos(JSON.parse([...todos, newTodos]));
-    }
-  }, []);
+
 
   return (
     <div className="container">
